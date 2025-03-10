@@ -1,7 +1,6 @@
 import os
 from langgraph.graph import StateGraph, MessagesState, START, END
 from langchain_openai import ChatOpenAI
-from operator import itemgetter
 
 api_key = os.getenv("OPENAI_API_KEY")
 
