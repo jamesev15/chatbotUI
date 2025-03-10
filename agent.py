@@ -1,8 +1,10 @@
 import os
+import streamlit as st
 from langgraph.graph import StateGraph, MessagesState, START, END
 from langchain_openai import ChatOpenAI
 
-api_key = os.getenv("OPENAI_API_KEY")
+#api_key = os.getenv("OPENAI_API_KEY")
+api_key = st.secrets["OPENAI_API_KEY"]
 
 llm = ChatOpenAI(name="gpt-4o-mini", api_key=api_key)
 
