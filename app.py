@@ -1,7 +1,7 @@
 import streamlit as st
 from agent import chatbot_agent
 
-st.title("Agent GPT")
+st.title("Chatbot GPT")
 
 
 if "messages" not in st.session_state:
