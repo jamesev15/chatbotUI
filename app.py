@@ -1,7 +1,13 @@
+import requests
 import streamlit as st
-from agent import chatbot_agent
 
 st.title("Chatbot GPT")
+
+AGENT_URL = "https://agent-cloud-771619624508.us-central1.run.app/chatbot"
+
+def call_agent(message):
+    response = requests.post(url=AGENT_URL, json={"message": message}).json()
+    return response["answer"]
 
 
 if "messages" not in st.session_state:
@@ -17,14 +23,6 @@ if prompt := st.chat_input("What is up?"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        state = chatbot_agent.invoke(
-            {
-                "messages": [
-                    {"role": m["role"], "content": m["content"]}
-                    for m in st.session_state.messages
-                ]
-            }
-        )
-        response = state["messages"][-1].content
+        response = call_agent(st.session_state.messages[-1]["content"])
         st.write(response)
     st.session_state.messages.append({"role": "assistant", "content": response})
